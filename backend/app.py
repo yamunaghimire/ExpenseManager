@@ -224,6 +224,13 @@ def save_receipt():
      }), 201
 
 
+# @app.route('/api/categories', methods=['GET'])
+# @jwt_required()
+# def get_categories():
+#     categories = Category.query.order_by(Category.name).all()
+#     result = [{"id": c.id, "name": c.name} for c in categories]
+#     return jsonify(result), 200
+
 @app.route('/api/categories', methods=['GET'])
 @jwt_required()
 def get_categories():
@@ -231,7 +238,25 @@ def get_categories():
     result = [{"id": c.id, "name": c.name} for c in categories]
     return jsonify(result), 200
 
+@app.route('/api/categories', methods=['POST'])
+@jwt_required()
+def add_category():
+    data = request.get_json()
+    name = data.get("name", "").strip()
 
+    if not name:
+        return jsonify({"message": "Category name is required"}), 400
+
+    # Check for duplicates
+    existing = Category.query.filter_by(name=name).first()
+    if existing:
+        return jsonify({"message": "Category already exists"}), 400
+
+    new_category = Category(name=name)
+    db.session.add(new_category)
+    db.session.commit()
+
+    return jsonify({"id": new_category.id, "name": new_category.name}), 201
 
 @app.route('/api/budget', methods=['POST'])
 @jwt_required()

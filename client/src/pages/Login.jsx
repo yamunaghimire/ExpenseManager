@@ -88,14 +88,123 @@
 
 // export default Login;
 
+// import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { FiUser, FiLock } from "react-icons/fi";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+
+// const Login = () => {
+//   const navigate = useNavigate();
+//   const [formData, setFormData] = useState({ email: "", password: "" });
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData((prev) => ({ ...prev, [name]: value }));
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     try {
+//       const response = await fetch("http://localhost:5000/api/login", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(formData),
+//       });
+
+//       const data = await response.json();
+
+//       if (response.ok) {
+//         localStorage.setItem("access_token", data.access_token);
+//         toast.success("Login successful!");
+//         setTimeout(() => navigate("/"), 1500);
+//       } else {
+//         toast.error(data.error || "Login failed");
+//       }
+//     } catch {
+//       toast.error("Network error");
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen flex flex-col justify-center items-center px-6 bg-white">
+//       <ToastContainer />
+
+//       {/* Heading */}
+//       <h1 className="text-5xl font-extrabold text-orange-500 mb-2">Hello!</h1>
+//       <p className="text-sm text-black mb-8">Sign in into your account</p>
+
+//       {/* Form */}
+//       <form onSubmit={handleSubmit} className="w-full max-w-sm">
+//         {/* Email */}
+//         <div className="relative mb-4">
+//           <input
+//             type="email"
+//             name="email"
+//             value={formData.email}
+//             onChange={handleChange}
+//             placeholder="Email"
+//             required
+//             className="w-full bg-gray-100 text-gray-700 rounded-xl px-4 py-3 pr-10 placeholder-gray-500"
+//           />
+//           <FiUser className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+//         </div>
+
+//         {/* Password */}
+//         <div className="relative mb-2">
+//           <input
+//             type="password"
+//             name="password"
+//             value={formData.password}
+//             onChange={handleChange}
+//             placeholder="Password"
+//             required
+//             className="w-full bg-gray-100 text-gray-700 rounded-xl px-4 py-3 pr-10 placeholder-gray-500"
+//           />
+//           <FiLock className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+//         </div>
+
+//         <div className="text-right text-sm text-gray-500 mb-6">
+//           <button type="button">Forgot Password</button>
+//         </div>
+
+//         {/* Submit Button */}
+//         <button
+//           type="submit"
+//           className="w-full bg-teal-500 text-white font-semibold py-3 rounded-xl mb-6"
+//         >
+//           SIGN IN
+//         </button>
+//       </form>
+
+//       {/* Sign Up Link */}
+//       <p className="text-sm text-black">
+//         Don’t have an account?{" "}
+//         <span
+//           onClick={() => navigate("/signup")}
+//           className="text-teal-500 font-medium cursor-pointer"
+//         >
+//           Sign Up
+//         </span>
+//       </p>
+//     </div>
+//   );
+// };
+
+// export default Login;
+
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiUser, FiLock } from "react-icons/fi";
 import { ToastContainer, toast } from "react-toastify";
+import { useTranslation } from "react-i18next"; // ✅ i18n
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation(); // ✅ hook
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
@@ -117,13 +226,13 @@ const Login = () => {
 
       if (response.ok) {
         localStorage.setItem("access_token", data.access_token);
-        toast.success("Login successful!");
+        toast.success(t("login_success"));
         setTimeout(() => navigate("/"), 1500);
       } else {
-        toast.error(data.error || "Login failed");
+        toast.error(data.error || t("login_failed"));
       }
     } catch {
-      toast.error("Network error");
+      toast.error(t("network_error"));
     }
   };
 
@@ -131,34 +240,32 @@ const Login = () => {
     <div className="min-h-screen flex flex-col justify-center items-center px-6 bg-white">
       <ToastContainer />
 
-      {/* Heading */}
-      <h1 className="text-5xl font-extrabold text-orange-500 mb-2">Hello!</h1>
-      <p className="text-sm text-black mb-8">Sign in into your account</p>
+      <h1 className="text-5xl font-extrabold text-orange-500 mb-2">
+        {t("login_hello")}
+      </h1>
+      <p className="text-sm text-black mb-8">{t("login_prompt")}</p>
 
-      {/* Form */}
       <form onSubmit={handleSubmit} className="w-full max-w-sm">
-        {/* Email */}
         <div className="relative mb-4">
           <input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="Email"
+            placeholder={t("email")}
             required
             className="w-full bg-gray-100 text-gray-700 rounded-xl px-4 py-3 pr-10 placeholder-gray-500"
           />
           <FiUser className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
         </div>
 
-        {/* Password */}
         <div className="relative mb-2">
           <input
             type="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
-            placeholder="Password"
+            placeholder={t("password")}
             required
             className="w-full bg-gray-100 text-gray-700 rounded-xl px-4 py-3 pr-10 placeholder-gray-500"
           />
@@ -166,26 +273,24 @@ const Login = () => {
         </div>
 
         <div className="text-right text-sm text-gray-500 mb-6">
-          <button type="button">Forgot Password</button>
+          <button type="button">{t("forgot_password")}</button>
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-teal-500 text-white font-semibold py-3 rounded-xl mb-6"
         >
-          SIGN IN
+          {t("sign_in")}
         </button>
       </form>
 
-      {/* Sign Up Link */}
       <p className="text-sm text-black">
-        Don’t have an account?{" "}
+        {t("no_account")}{" "}
         <span
           onClick={() => navigate("/signup")}
           className="text-teal-500 font-medium cursor-pointer"
         >
-          Sign Up
+          {t("sign_up")}
         </span>
       </p>
     </div>

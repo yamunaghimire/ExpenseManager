@@ -1,0 +1,20 @@
+{
+  "hi_user": "नमस्ते {{name}}!",
+  "you_spent": "तपाईंले खर्च गर्नुभएको छ",
+  "view_budget_overview": "बजेटको विस्तृत जानकारी हेर्नुहोस्",
+  "spending_trend": "खर्च प्रवृत्ति",
+  "budget_breakdown": "बजेट विवरण",
+  "food_beverages": "खाना र पेय पदार्थ",
+  "personal_care": "व्यक्तिगत हेरचाह",
+  "household_supplies": "घरेलु सामग्री",
+  "health_pharmacy": "स्वास्थ्य र फार्मेसी",
+  "apparel_accessories": "लुगा र अन्य सामान",
+  "miscellaneous": "अन्य खर्च",
+  "months": {
+    "jan": "जनवरी",
+    "feb": "फेब्रुअरी",
+    "mar": "मार्च",
+    "apr": "अप्रिल",
+    "may": "मे"
+  }
+}

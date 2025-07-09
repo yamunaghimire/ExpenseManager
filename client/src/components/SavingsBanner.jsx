@@ -1,12 +1,43 @@
+// import React from "react";
+// import { useNavigate } from "react-router-dom";
+// import { FaPieChart } from "react-icons/fa";
+
+// const BudgetOverviewBanner = () => {
+//   const navigate = useNavigate();
+
+//   const handleClick = () => {
+//     navigate("/budget-overview"); // adjust route if needed
+//   };
+
+//   return (
+//     <div
+//       onClick={handleClick}
+//       className="bg-green-100 hover:bg-green-200 cursor-pointer rounded-lg mx-5 p-4 mt-4 shadow-md flex items-center justify-between transition duration-200"
+//     >
+//       <div>
+//         <h2 className="text-lg font-semibold text-green-800 mb-1">View Budget Overview</h2>
+//         <p className="text-sm text-green-700">See how you're tracking your monthly budgets</p>
+//       </div>
+//       <FaPieChart className="text-2xl text-green-700" />
+//     </div>
+//   );
+// };
+
+// export default BudgetOverviewBanner;
+
+
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaPieChart } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const BudgetOverviewBanner = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleClick = () => {
-    navigate("/budget-overview"); // adjust route if needed
+    navigate("/budget-overview");
   };
 
   return (
@@ -15,8 +46,12 @@ const BudgetOverviewBanner = () => {
       className="bg-green-100 hover:bg-green-200 cursor-pointer rounded-lg mx-5 p-4 mt-4 shadow-md flex items-center justify-between transition duration-200"
     >
       <div>
-        <h2 className="text-lg font-semibold text-green-800 mb-1">View Budget Overview</h2>
-        <p className="text-sm text-green-700">See how you're tracking your monthly budgets</p>
+        <h2 className="text-lg font-semibold text-green-800 mb-1">
+          {t("view_budget_overview")}
+        </h2>
+        <p className="text-sm text-green-700">
+          {t("track_monthly_budget")}
+        </p>
       </div>
       <FaPieChart className="text-2xl text-green-700" />
     </div>

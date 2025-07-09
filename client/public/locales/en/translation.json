@@ -1,0 +1,20 @@
+{
+  "hi_user": "Hi {{name}}!",
+  "you_spent": "You've Spent",
+  "view_budget_overview": "View Budget Overview",
+  "spending_trend": "Spending Trend",
+  "budget_breakdown": "Budget Breakdown",
+  "food_beverages": "Food and Beverages",
+  "personal_care": "Personal Care",
+  "household_supplies": "Household Supplies",
+  "health_pharmacy": "Health and Pharmacy",
+  "apparel_accessories": "Apparel and Accessories",
+  "miscellaneous": "Miscellaneous",
+  "months": {
+    "jan": "Jan",
+    "feb": "Feb",
+    "mar": "Mar",
+    "apr": "Apr",
+    "may": "May"
+  }
+}

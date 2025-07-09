@@ -4,12 +4,15 @@ from models import Category
 
 with app.app_context():
     categories = [
-        "Food and Beverages",
-        "Personal Care",
-        "Household Supplies",
-        "Health and Pharmacy",
-        "Apparel and Accessories",
-        "Miscellaneous"
+        "Groceries",
+        "Self Care",
+        "Health and Medicine",
+        "Education",
+        "Rent",
+        "Clothing and Accesories",
+        "Entertainment",
+        "Miscellaneous",
+        
     ]
 
     for category_name in categories:
