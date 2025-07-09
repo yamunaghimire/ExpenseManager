@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import ReceiptDetailModal from '../components/ReceiptDetailModal'; 
+import ReceiptDetailModal from '../components/ReceiptDetailModal';
+import { useTranslation } from 'react-i18next';
 
 const ReceiptsPage = () => {
   const [receipts, setReceipts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedReceipt, setSelectedReceipt] = useState(null);
+  const { t } = useTranslation();
 
   const token = localStorage.getItem('access_token');
 
@@ -24,7 +26,7 @@ const ReceiptsPage = () => {
       setReceipts(res.data.receipts);
     } catch (err) {
       console.error(err);
-      alert('Failed to load receipts.');
+      alert(t('network_error'));
     } finally {
       setLoading(false);
     }
@@ -44,18 +46,18 @@ const ReceiptsPage = () => {
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">My Receipts</h1>
+      <h1 className="text-3xl font-bold mb-6">{t('my_receipts')}</h1>
 
       <input
         type="text"
-        placeholder="Search by date, vendor, or item name..."
+        placeholder={t('search_placeholder')}
         className="border border-gray-300 rounded px-4 py-2 mb-6 w-full"
         value={searchQuery}
         onChange={e => setSearchQuery(e.target.value)}
       />
 
       {loading ? (
-        <div className="flex justify-center items-center text-gray-500">Loading...</div>
+        <div className="flex justify-center items-center text-gray-500">{t('loading')}</div>
       ) : filteredReceipts.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredReceipts.map(receipt => (
@@ -65,15 +67,15 @@ const ReceiptsPage = () => {
               className="border rounded p-4 cursor-pointer hover:shadow-lg transition"
             >
               <h2 className="text-xl font-semibold mb-1">{receipt.merchant_name}</h2>
-              <p className="text-gray-700 mb-1">Total: NPR {receipt.total_amount}</p>
+              <p className="text-gray-700 mb-1">{t('totalAmount')}: NPR {receipt.total_amount}</p>
               <p className="text-gray-500 text-sm">
-                Date: {new Date(receipt.bill_date).toLocaleDateString()}
+                {t('billDate')}: {new Date(receipt.bill_date).toLocaleDateString()}
               </p>
             </div>
           ))}
         </div>
       ) : (
-        <div className="text-center text-gray-500">No results found.</div>
+        <div className="text-center text-gray-500">{t('no_results_found')}</div>
       )}
 
       {selectedReceipt && (

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
 
 
 const ViewBudgetsPage = () => {
@@ -9,6 +10,7 @@ const ViewBudgetsPage = () => {
   const [budgetsByMonth, setBudgetsByMonth] = useState({});
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchAllBudgets = async () => {
@@ -45,7 +47,7 @@ const ViewBudgetsPage = () => {
     fetchAllBudgets();
   }, []);
 
-  if (loading) return <p className="p-4">Loading budgets...</p>;
+  if (loading) return <p className="p-4">{t('loading_budgets')}</p>;
 
   return (
     <div className="min-h-screen bg-gray-50 p-4">
@@ -54,7 +56,7 @@ const ViewBudgetsPage = () => {
  
 </button>
 
-      <h1 className="text-2xl font-bold text-center mb-6">Your Set Budgets</h1>
+      <h1 className="text-2xl font-bold text-center mb-6">{t('your_set_budgets')}</h1>
 
       {months.map((month) => {
         const budgetItems = budgetsByMonth[month] || [];
@@ -68,13 +70,13 @@ const ViewBudgetsPage = () => {
                 onClick={() => navigate('/budget', { state: { month } })}
                 className="text-sm bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded"
               >
-                Edit
+                {t('edit')}
               </button>
             </div>
 
             {/* Total */}
             <p className="font-semibold text-gray-800 mb-2">
-              Total Monthly Budget: <span className="text-black">Rs. {total}</span>
+              {t('total_monthly_budget')}: <span className="text-black">Rs. {total}</span>
             </p>
 
             {/* Progress Bar (placeholder) */}
@@ -93,7 +95,7 @@ const ViewBudgetsPage = () => {
                 ))}
               </ul>
             ) : (
-              <p>No budgets set for this month.</p>
+              <p>{t('no_budgets_set')}</p>
             )}
           </div>
         );

@@ -1,6 +1,8 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ReceiptDetailModal = ({ receipt, onClose }) => {
+  const { t } = useTranslation();
   if (!receipt) return null;
 
   return (
@@ -24,13 +26,13 @@ const ReceiptDetailModal = ({ receipt, onClose }) => {
           />
         )}
 
-        <p><strong>Address:</strong> {receipt.address}</p>
-        <p><strong>Bill Number:</strong> {receipt.bill_number}</p>
-        <p><strong>Date:</strong> {new Date(receipt.bill_date).toLocaleDateString()}</p>
-        <p><strong>Total Amount:</strong> NPR {receipt.total_amount}</p>
+        <p><strong>{t('address')}:</strong> {receipt.address}</p>
+        <p><strong>{t('billNumber')}:</strong> {receipt.bill_number}</p>
+        <p><strong>{t('billDate')}:</strong> {new Date(receipt.bill_date).toLocaleDateString()}</p>
+        <p><strong>{t('totalAmount')}:</strong> NPR {receipt.total_amount}</p>
 
         <div className="mt-4">
-          <h3 className="font-semibold mb-2">Items:</h3>
+          <h3 className="font-semibold mb-2">{t('items')}:</h3>
           <ul className="list-disc list-inside max-h-48 overflow-y-auto">
             {receipt.items && receipt.items.length > 0 ? (
               receipt.items.map((item, idx) => (
@@ -39,7 +41,7 @@ const ReceiptDetailModal = ({ receipt, onClose }) => {
                 </li>
               ))
             ) : (
-              <li>No items found.</li>
+              <li>{t('no_items_found')}</li>
             )}
           </ul>
         </div>
@@ -48,7 +50,7 @@ const ReceiptDetailModal = ({ receipt, onClose }) => {
           onClick={onClose}
           className="mt-6 bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
         >
-          Close
+          {t('close')}
         </button>
       </div>
     </div>

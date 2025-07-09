@@ -208,12 +208,14 @@ import { MdDocumentScanner } from 'react-icons/md';
 import UploadScanOptions from './UploadScanOptions';
 import EditableForm from './EditableForm';
 import LoadingIndicator from './LoadingIndicator';
+import { useTranslation } from 'react-i18next';
 
 const ScanActionButton = () => {
   const [showOptions, setShowOptions] = useState(false);
   const [image, setImage] = useState(null);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
 
   const fileInputRef = useRef(null);
   const token = localStorage.getItem('access_token');
@@ -245,10 +247,10 @@ const ScanActionButton = () => {
       ...res.data.data,
       image_path: res.data.image_path
     });
-      alert('Image processed!');
+      alert(t('upload_receipt'));
     } catch (err) {
       console.error(err);
-      alert('Failed to process image.');
+      alert(t('network_error'));
     } finally {
       setLoading(false);
     }
@@ -256,7 +258,7 @@ const ScanActionButton = () => {
 
   const handleScanClick = () => {
     setShowOptions(false);
-    alert('Scan Receipt clicked');
+    alert(t('scan_receipt'));
   };
 
   const handleConfirm = async () => {
@@ -268,12 +270,12 @@ const ScanActionButton = () => {
         },
         withCredentials: true,
       });
-      alert('Receipt saved!');
+      alert(t('save_receipt'));
       setImage(null);
       setData(null);
     } catch (err) {
       console.error(err);
-      alert('Save failed.');
+      alert(t('network_error'));
     }
   };
 
