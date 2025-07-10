@@ -8,7 +8,10 @@ import BudgetPage from './pages/BudgetPage';
 import ViewBudgetsPage from './pages/ViewBudget';
 import ReceiptsPage from './pages/ReceiptsPage';
 import BudgetOverviewPage from './pages/BudgetOverviewPage';
-
+import TrendingPage from './pages/TrendingPage';
+import Learn from './pages/Learn';
+import Notification from './pages/Notification';
+import DocumentingPage from './pages/DocumentingPage';
 export default function App() {
   return (
     <Router>
@@ -23,6 +26,10 @@ export default function App() {
            <Route path="/view-budgets" element={<ViewBudgetsPage/>} />
             <Route path="/receipts" element={<ReceiptsPage/>} />
             <Route path="/budget-overview" element={<BudgetOverviewPage/>} />
+            <Route path="/trending" element={<TrendingPage/>} />
+            <Route path="/learn" element={<Learn/>} />
+            <Route path="/notification" element={<Notification/>} />
+            <Route path="/documents" element={<DocumentingPage/>} />
            
 
     

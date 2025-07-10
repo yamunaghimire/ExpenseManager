@@ -95,6 +95,10 @@ export default function Navbar() {
     navigate("/manual-entry");
   };
 
+  const handleBellClick = () => {
+    navigate("/notification");
+  };
+
   return (
     <div className="mx-[30px] mt-4 flex justify-between items-center">
       <div className="text-3xl mt-2 font-semibold">
@@ -107,7 +111,7 @@ export default function Navbar() {
         >
           <FiPlus size={18} />
         </button>
-        <button className="m-1 text-2xl text-gray-700">
+        <button className="m-1 text-2xl text-gray-700" onClick={handleBellClick}>
           <FiBell />
         </button>
       </div>

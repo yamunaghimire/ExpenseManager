@@ -102,7 +102,11 @@ import TimeFilterTabs from '../components/TimeFilterTabs';
 import BottomNavBar from '../components/BottomNavbar';
 import SpendingTrendChart from '../components/SpendingTrendChart';
 import BudgetBreakdown from '../components/BudgetBreakdown';
-import BudgetOverviewBanner from '../components/BudgetOverviewBanner';
+// import BudgetOverviewBanner from '../components/BudgetOverviewBanner';
+import Banners from '../components/Banners';
+import Circles from '../components/Circles';
+import Graph from '../components/Graph';
+import SavingsBanner from '../components/Savings';
 
 export default function Homepage() {
   const [selectedMonth, setSelectedMonth] = useState("July");
@@ -113,9 +117,17 @@ export default function Homepage() {
       <Navbar />
       <main className="flex-grow">
         <SpendingCard />
-        <BudgetOverviewBanner />
-        <SpendingTrendChart />
+        <div className="mx-[9px] mt-[20px]">
+        <Banners/>
+        </div>
+        {/* <BudgetOverviewBanner /> */}
+        {/* <SpendingTrendChart /> */}
+        <Graph/>
+        <div className="mx-[9px] mt-[20px]">
+          <SavingsBanner/>
+        </div>
 
+        
         {/* 🔁 Translated heading */}
         <h2 className="font-medium text-3xl mt-[20px] mx-[20px]">
           {t("budget_breakdown")}
@@ -125,7 +137,9 @@ export default function Homepage() {
           selectedMonth={selectedMonth}
           onSelectMonth={setSelectedMonth}
         />
-        <BudgetBreakdown selectedMonth={selectedMonth} />
+        <Circles/>
+        {/* <BudgetBreakdown selectedMonth={selectedMonth} /> */}
+        
       </main>
       <BottomNavBar />
     </div>

@@ -68,15 +68,19 @@ const BottomNavBar = () => {
     navigate("/");
   };
 
+  const handleDocumentsClick = () => {
+    navigate("/documents");
+  };
+
   return (
-    <div className="relative bg-white border-t shadow-md w-full fixed bottom-0 flex justify-around items-center py-3 z-50">
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-sm w-full flex justify-around items-center py-3 z-50 md:hidden">
       <div className="flex flex-col items-center text-purple-500">
         <FiHome className="text-xl" onClick={handleHomeClick} />
         <span className="text-xs mt-1">{t("nav_home")}</span>
       </div>
 
       <div className="flex flex-col items-center text-gray-400">
-        <FiFileText className="text-xl" />
+        <FiFileText className="text-xl" onClick={handleDocumentsClick} />
         <span className="text-xs mt-1">{t("nav_documents")}</span>
       </div>
 
