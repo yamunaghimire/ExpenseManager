@@ -28,7 +28,7 @@ from services.category_service import categorize_items_for_receipt
 
 app = Flask(__name__)
 CORS(app,
-    resources={r"/*": {"origins": ["http://localhost:5173"]}},
+    resources={r"/*": {"origins": ["http://localhost:5174"]}},
     supports_credentials=True,
     allow_headers=["Content-Type", "Authorization"],
     methods=["GET", "POST", "OPTIONS"]
