@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next'; 
 
 import Navbar from '../components/Navbar';
-import SpendingCard from '../components/SpendingCard';
 import TimeFilterTabs from '../components/TimeFilterTabs';
 import BottomNavBar from '../components/BottomNavbar';
 // import SpendingTrendChart from '../components/SpendingTrendChart';
