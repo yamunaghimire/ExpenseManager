@@ -8,7 +8,6 @@ import { useTranslation } from 'react-i18next';
 
 const UploadScanOptions = ({ triggerUpload, handleScanClick }) => {
   const { t } = useTranslation();
-
   return (
     <div className="absolute bottom-11 left-1/2 transform -translate-x-1/2 w-52 bg-white rounded-xl shadow-xl p-1 z-20">
       <button

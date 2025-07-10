@@ -3,18 +3,15 @@ import axios from 'axios';
 import { MdDocumentScanner } from 'react-icons/md';
 import UploadScanOptions from './UploadScanOptions';
 import EditableForm from './EditableForm';
-import Webcam from 'react-webcam';
-import { FiCamera, FiX } from 'react-icons/fi';
+import LoadingIndicator from './LoadingIndicator';
+import { useTranslation } from 'react-i18next';
 
 const ScanActionButton = () => {
   const [showOptions, setShowOptions] = useState(false);
   const [image, setImage] = useState(null);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [showCamera, setShowCamera] = useState(false);
-  const [showProcessing, setShowProcessing] = useState(false);
-  const [showForm, setShowForm] = useState(false);
-  // Remove formLoading and formError state
+  const { t } = useTranslation();
 
   const fileInputRef = useRef(null);
   const webcamRef = useRef(null);
@@ -58,35 +55,7 @@ const ScanActionButton = () => {
 
   const handleScanClick = () => {
     setShowOptions(false);
-    setShowCamera(true);
-  };
-
-  const handleCapture = async () => {
-    if (!webcamRef.current) return;
-    const imageSrc = webcamRef.current.getScreenshot();
-    if (!imageSrc) return;
-    setShowCamera(false);
-    setShowProcessing(true);
-    setData(null);
-    setTimeout(() => {
-      setShowProcessing(false);
-      setShowForm(true);
-    }, 1000);
-    try {
-      const res = await fetch(imageSrc);
-      const blob = await res.blob();
-      const formData = new FormData();
-      formData.append('image', blob, 'capture.jpg');
-      const token = localStorage.getItem('access_token');
-      const response = await axios.post('http://localhost:5000/api/upload', formData, {
-        headers: { Authorization: `Bearer ${token}` },
-        withCredentials: true,
-      });
-      setData({ ...response.data.data, image_path: response.data.image_path });
-    } catch (err) {
-      // Do nothing, just leave the form empty if failed
-      console.error(err);
-    }
+    alert(t('scan_receipt'));
   };
 
   const handleConfirm = async () => {

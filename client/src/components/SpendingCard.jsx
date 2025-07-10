@@ -57,12 +57,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FiShoppingBag } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
-import { convertToNepaliDigits } from '../utils/numberUtils';
 
 const SpendingCard = () => {
   const { t, i18n } = useTranslation(); // add i18n
   const [amount, setAmount] = useState(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null);  // Track error
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchAmount = async () => {
@@ -97,11 +97,10 @@ const SpendingCard = () => {
           <FiShoppingBag className="text-green-600 text-xl" />
         </div>
         <div>
-          <p className="text-sm text-gray-600">{t('you_spent')}</p>
+          <p className="text-sm text-gray-600">{t('youve_spent')}</p>
           <p className="text-2xl font-bold text-gray-800">
-            रु १० ,०००
-            {/* ){error ? error :
-              amount !== null ? `${t('currency_symbol')} ${i18n.language === 'ne' ? convertToNepaliDigits(amount.toFixed(2) : amount.toFixed(2)}` : t('loading')} */}
+            {error ? t('could_not_load_spending') :
+              amount !== null ? `Rs. ${amount.toFixed(2)}` : t('loading')}
           </p>
         </div>
       </div>
